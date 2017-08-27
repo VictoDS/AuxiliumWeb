@@ -286,6 +286,17 @@
 				});
 				initialize();
 			}
+			function buscaEndereco(lat, lng){
+				var latlng = lat+","+lng; 
+				var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+latlng; 
+				//alert(url);
+				$.getJSON(url, function (data) { 
+					var adress = data.results[0].formatted_address; 
+					//alert(adress);
+					$('#endereco').html(adress);
+					//endereco_campo.value = adress;
+				});
+			}
 			var variavel = setInterval(function() {carregaLista();}, 1000);
 		</script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtys0DZkR6N6iNwQjQTLzA49iz-niYfEo"></script>

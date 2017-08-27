@@ -7,7 +7,7 @@
 		include "banco.php";
 		$conn = conecta();
 		$id = @$_GET["id"];
-		$sql = "SELECT u.fone, u.nome, u.cpf, o.cidade, o.bairro, o.logradouro, o.numero, o.tip_ocorrencia, o.descricao
+		$sql = "SELECT u.fone, u.nome, u.cpf, o.lat, o.lng, o.tip_ocorrencia, o.descricao
 				  FROM ocorrencia o inner join usuario u on (u.id = o.id_usuario)
 				 WHERE o.id = '$id'";
 		$ret = $conn->query($sql);
@@ -26,22 +26,22 @@
 			<td>CPF</td>
 			<td><?=$obj["cpf"]?></td>
 		</tr>
-		<tr>
+		<!--<tr>
 			<td>Cidade</td>
-			<td><?=$obj["cidade"]?></td>
+			<td><?//=$obj["cidade"]?></td>
 		</tr>
 		<tr>
 			<td>Bairro</td>
-			<td><?=$obj["bairro"]?></td>
+			<td><?//=$obj["bairro"]?></td>
 		</tr>
-		<tr>
+		<tr>-->
 			<td>Endereço</td>
-			<td><?=$obj["logradouro"]?></td>
+			<td id="endereco"></td>
 		</tr>
-		<tr>
+		<!--<tr>
 			<td>Número</td>
-			<td><?=$obj["numero"]?></td>
-		</tr>
+			<td><?//=$obj["numero"]?></td>
+		</tr>-->
 		<tr>
 			<td>Tipo de Ocorrência</td>
 			<td><?=$obj["tip_ocorrencia"]?></td>
@@ -59,4 +59,5 @@
 		<p class="w3-third w3-padding w3-white"><button class="w3-btn-block w3-red" onclick="encerraSol(<?=$id?>);">Ecerrar atendimento</button></p>
 	</div>
 </footer>
+<script>buscaEndereco(<?=$obj["lat"]?>,<?=$obj["lng"]?>);</script>
 <?php }?>
